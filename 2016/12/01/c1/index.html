@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="数组指针、指针数组与函数指针int (*a)[n]    //数组指针，指向数组的指针int *a[n]      //指针数组，数组的内容为指针bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int)//函数指针的数组">
+<meta name="description" content="数组指针、指针数组与函数指针
+1234567int (*a)[n]                  //数组指针，指向数组的指针int *a[n]         //指针数组，数组的内容为指针bool (*a)(int)    //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int) //函数指针的数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++小知识之指针">
 <meta property="og:url" content="http://lxjdaydayup.cn/2016/12/01/c1/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:description" content="数组指针、指针数组与函数指针int (*a)[n]    //数组指针，指向数组的指针int *a[n]      //指针数组，数组的内容为指针bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int)//函数指针的数组">
-<meta property="og:updated_time" content="2016-12-01T16:04:54.000Z">
+<meta property="og:description" content="数组指针、指针数组与函数指针
+1234567int (*a)[n]                  //数组指针，指向数组的指针int *a[n]         //指针数组，数组的内容为指针bool (*a)(int)    //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int) //函数指针的数组">
+<meta property="og:updated_time" content="2016-12-02T15:11:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++小知识之指针">
-<meta name="twitter:description" content="数组指针、指针数组与函数指针int (*a)[n]    //数组指针，指向数组的指针int *a[n]      //指针数组，数组的内容为指针bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int)//函数指针的数组">
+<meta name="twitter:description" content="数组指针、指针数组与函数指针
+1234567int (*a)[n]                  //数组指针，指向数组的指针int *a[n]         //指针数组，数组的内容为指针bool (*a)(int)    //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int) //函数指针的数组">
 
 
 
@@ -347,12 +350,22 @@
 
       
         <ol>
-<li>数组指针、指针数组与函数指针<br><code>int (*a)[n]    //数组指针，指向数组的指针</code><br><code>int *a[n]      //指针数组，数组的内容为指针</code><br><code>bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针</code><br><code>bool (*a[n])(int)//函数指针的数组</code> <a id="more"></a></li>
-<li>指针数组、二级指针与二级指针数组<br><code>int *p[n]      //指针数组，指针指向一个地址，地址中存放的是指针</code><br><code>int **p        //二级指针，也就是指向的内容存放的还是一个地址，与指针数组等价</code><br><code>int **p[n]     //二级指针数组，数组的内容是二级指针</code></li>
-<li>指针运算<br><code>int a[5]</code> 则<code>a</code>和<code>&amp;a[0]</code>都表示存放数组的初始地址，而<code>&amp;a</code>却是指向大小为5的数组指针，在其上进行<code>+1</code>,即<code>&amp;a+1</code>就是指到数组越界后第一个位置。公式可以如下表示：<br><code>&amp;a + i = a + i * sizeof(a);</code><br><code>a + i = a + i * sizeof(a[0]);</code></li>
-<li>指针表示<br><code>char *p[3] ={&quot;hello&quot;,&quot;world&quot;,&quot;China&quot;}</code> 若要取’r’,即p<a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">1</a>，则也可用<code>*(p[1]+2)</code>或<code>*(*(p+1)+3)</code></li>
-<li><a href="https://github.com/xuelangZF/CS_Offer/blob/master/C%2B%2B/Pointer.md" target="_blank" rel="external">指针详解1</a></li>
-<li><a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">指针详解2</a></li>
+<li><p>数组指针、指针数组与函数指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int (*a)[n]                  //数组指针，指向数组的指针</div><div class="line"></div><div class="line">int *a[n]         //指针数组，数组的内容为指针</div><div class="line"></div><div class="line">bool (*a)(int)    //函数指针，输入整形，返回布尔型的函数指针</div><div class="line"></div><div class="line">bool (*a[n])(int) //函数指针的数组</div></pre></td></tr></table></figure>
+<a id="more"></a>
+</li>
+<li><p>指针数组、二级指针与二级指针数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int *p[n]      //指针数组，指针指向一个地址，地址中存放的是指针</div><div class="line"></div><div class="line">int **p        //二级指针，也就是指向的内容存放的还是一个地址，与指针数组等价</div><div class="line"></div><div class="line">int **p[n]     //二级指针数组，数组的内容是二级指针</div></pre></td></tr></table></figure>
+</li>
+<li><p>指针运算<br><code>int a[5]</code> 则<code>a</code>和<code>&amp;a[0]</code>都表示存放数组的初始地址，而<code>&amp;a</code>却是指向大小为5的数组指针，在其上进行<code>+1</code>,即<code>&amp;a+1</code>就是指到数组越界后第一个位置。公式可以如下表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;a + i = a + i * sizeof(a);</div><div class="line"></div><div class="line">a + i = a + i * sizeof(a[0]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>指针表示<br><code>char *p[3] ={&quot;hello&quot;,&quot;world&quot;,&quot;China&quot;}</code> 若要取’r’,即p[1][2]，则也可用<code>*(p[1]+2)</code>或<code>*(*(p+1)+3)</code></p>
+</li>
+<li><p><a href="https://github.com/xuelangZF/CS_Offer/blob/master/C%2B%2B/Pointer.md" target="_blank" rel="external">指针详解1</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">指针详解2</a></p>
+</li>
 </ol>
 
       
