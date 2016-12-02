@@ -92,7 +92,7 @@
 <meta property="og:description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
 <meta property="og:image" content="http://lxjdaydayup.cn/images/m12.png">
 <meta property="og:image" content="http://lxjdaydayup.cn/images/m21.jpg">
-<meta property="og:updated_time" content="2016-12-02T10:27:34.000Z">
+<meta property="og:updated_time" content="2016-12-02T11:24:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Machine Learning小知识之ROC和ACU">
 <meta name="twitter:description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
@@ -352,7 +352,7 @@
 <li>可以使分类器的评估结果用曲线的形式更直观地展示在二维空间中。</li>
 </ol>
 <p>对于二分类问题，有下面的混淆矩阵：</p>
-<p><img src="images/m12.png" alt=""></p>
+<p><img src="/images/m12.png" alt=""></p>
 <p>由混淆矩阵可得出下面的二类别概率矩阵:</p>
 <table>
 <thead>
@@ -378,7 +378,7 @@
 <p>在逻辑上，显然可以得出：TPR = 1 - FNR，FPR = 1 - TNR.</p>
 <p>ROC曲线是以FPR为横轴，TPR为纵轴，横轴与纵轴长度相等，为单位1，形成一个正方形的二维空间，在此二维空间中将各个(FPR,TPR)点标出，用直线连接各相邻两点构建而成的一条曲线。</p>
 <p>对一个于概率分类器，通过设置一个阈值 <em>t</em>  可以将概率分类器用做一个离散分类器：如果概率分类器对实例 <em>i</em> 的预测结果大于阈值 <em>t</em>  时，实例 <em>i</em>  被划分为正例，否则被划分为负例，当所有实例被处理完后，便会在ROC空间中产生一个点。那么如果让阈值 <em>t</em>  不断变化，就会产生无数的点，将这些点连接起来就形成了一条曲线。理论上阈值 <em>t</em>  可以在 -inf 和 +inf 之间取值，但概率分类器对实例的预测值在 0 到 1 之间，一般取实例 <em>i</em>  属于正例的分类器预测值 <em>f(i)</em> 的最小值和最大值作为阈值 <em>t</em>  取值范围的上限和下限。</p>
-<p><img src="images/m21.jpg" alt=""></p>
+<p><img src="/images/m21.jpg" alt=""></p>
 <h3 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h3><p>AUC(Area Under Curve)被定义为ROC曲线下的面积，显然这个面积的数值不会大于 1。又由于ROC曲线一般都处于 y = x 这条直线的上方，所以AUC 的取值范围在 0.5 和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而AUC作为一个数值，可以更清楚的说明对应AUC更大的分类器效果更好。</p>
 <p><a href="https://www.douban.com/note/284051363/?type=like" target="_blank" rel="external">ROC和AUC详解</a></p>
 
