@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++小知识," />
+  <meta name="keywords" content="Machine Learning小知识," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="数组指针、指针数组与函数指针int (*a)[n]    //数组指针，指向数组的指针int *a[n]      //指针数组，数组的内容为指针bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int)//函数指针的数组">
+<meta name="description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++小知识之指针">
-<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/01/c1/index.html">
+<meta property="og:title" content="Machine Learning小知识之ROC和ACU">
+<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/02/m2/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:description" content="数组指针、指针数组与函数指针int (*a)[n]    //数组指针，指向数组的指针int *a[n]      //指针数组，数组的内容为指针bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int)//函数指针的数组">
-<meta property="og:updated_time" content="2016-12-01T16:04:54.000Z">
+<meta property="og:description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
+<meta property="og:image" content="http://lxjdaydayup.cn/images/m12.png">
+<meta property="og:image" content="http://lxjdaydayup.cn/images/m21.jpg">
+<meta property="og:updated_time" content="2016-12-02T10:27:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++小知识之指针">
-<meta name="twitter:description" content="数组指针、指针数组与函数指针int (*a)[n]    //数组指针，指向数组的指针int *a[n]      //指针数组，数组的内容为指针bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针bool (*a[n])(int)//函数指针的数组">
+<meta name="twitter:title" content="Machine Learning小知识之ROC和ACU">
+<meta name="twitter:description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
+<meta name="twitter:image" content="http://lxjdaydayup.cn/images/m12.png">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/01/c1/"/>
+  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/02/m2/"/>
 
 
 
 
 
-  <title> C++小知识之指针 | MYSPACE </title>
+  <title> Machine Learning小知识之ROC和ACU | MYSPACE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/01/c1/">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/02/m2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DayDayUp">
@@ -272,7 +275,7 @@
             
             
               
-                C++小知识之指针
+                Machine Learning小知识之ROC和ACU
               
             
           </h1>
@@ -285,8 +288,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T00:00:00+08:00">
-                2016-12-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T00:00:00+08:00">
+                2016-12-02
               </time>
             
 
@@ -304,8 +307,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -339,14 +342,45 @@
       
 
       
-        <ol>
-<li>数组指针、指针数组与函数指针<br><code>int (*a)[n]    //数组指针，指向数组的指针</code><br><code>int *a[n]      //指针数组，数组的内容为指针</code><br><code>bool (*a)(int)  //函数指针，输入整形，返回布尔型的函数指针</code><br><code>bool (*a[n])(int)//函数指针的数组</code> <a id="more"></a></li>
-<li>指针数组、二级指针与二级指针数组<br><code>int *p[n]      //指针数组，指针指向一个地址，地址中存放的是指针</code><br><code>int **p        //二级指针，也就是指向的内容存放的还是一个地址，与指针数组等价</code><br><code>int **p[n]     //二级指针数组，数组的内容是二级指针</code></li>
-<li>指针运算<br><code>int a[5]</code> 则<code>a</code>和<code>&amp;a[0]</code>都表示存放数组的初始地址，而<code>&amp;a</code>却是指向大小为5的数组指针，在其上进行<code>+1</code>,即<code>&amp;a+1</code>就是指到数组越界后第一个位置。公式可以如下表示：<br><code>&amp;a + i = a + i * sizeof(a);</code><br><code>a + i = a + i * sizeof(a[0]);</code></li>
-<li>指针表示<br><code>char *p[3] ={&quot;hello&quot;,&quot;world&quot;,&quot;China&quot;}</code> 若要取’r’,即p<a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">1</a>，则也可用<code>*(p[1]+2)</code>或<code>*(*(p+1)+3)</code></li>
-<li><a href="https://github.com/xuelangZF/CS_Offer/blob/master/C%2B%2B/Pointer.md" target="_blank" rel="external">指针详解1</a></li>
-<li><a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">指针详解2</a></li>
+        <h3 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h3><p>ROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：</p>
+<a id="more"></a>
+<ol>
+<li>充分利用了预测得到的概率值。</li>
+<li>给出不同类的不同分布情况差别，即当是不平衡数据时，不同的数据分布，将得到不同的分类结果，而准确率评估则默认所有数据集都是平衡数据集。</li>
+<li>考虑了不同种类错误分类代价的不同，而准确率评估默认所有的错误代价都是相同的，这在现实生活中是不切实际的。</li>
+<li>二分类的ROC曲线通过斜率反映了正例和反例之间的重要关系，同时也反映出类的分布和代价之间的关系。</li>
+<li>可以使分类器的评估结果用曲线的形式更直观地展示在二维空间中。</li>
 </ol>
+<p>对于二分类问题，有下面的混淆矩阵：</p>
+<p><img src="images/m12.png" alt=""></p>
+<p>由混淆矩阵可得出下面的二类别概率矩阵:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">P</th>
+<th style="text-align:center">N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>T</strong></td>
+<td style="text-align:center">TPR</td>
+<td style="text-align:center">FPR</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>F</strong></td>
+<td style="text-align:center">FNR</td>
+<td style="text-align:center">TNR</td>
+</tr>
+</tbody>
+</table>
+<p>在逻辑上，显然可以得出：TPR = 1 - FNR，FPR = 1 - TNR.</p>
+<p>ROC曲线是以FPR为横轴，TPR为纵轴，横轴与纵轴长度相等，为单位1，形成一个正方形的二维空间，在此二维空间中将各个(FPR,TPR)点标出，用直线连接各相邻两点构建而成的一条曲线。</p>
+<p>对一个于概率分类器，通过设置一个阈值 <em>t</em>  可以将概率分类器用做一个离散分类器：如果概率分类器对实例 <em>i</em> 的预测结果大于阈值 <em>t</em>  时，实例 <em>i</em>  被划分为正例，否则被划分为负例，当所有实例被处理完后，便会在ROC空间中产生一个点。那么如果让阈值 <em>t</em>  不断变化，就会产生无数的点，将这些点连接起来就形成了一条曲线。理论上阈值 <em>t</em>  可以在 -inf 和 +inf 之间取值，但概率分类器对实例的预测值在 0 到 1 之间，一般取实例 <em>i</em>  属于正例的分类器预测值 <em>f(i)</em> 的最小值和最大值作为阈值 <em>t</em>  取值范围的上限和下限。</p>
+<p><img src="images/m21.jpg" alt=""></p>
+<h3 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h3><p>AUC(Area Under Curve)被定义为ROC曲线下的面积，显然这个面积的数值不会大于 1。又由于ROC曲线一般都处于 y = x 这条直线的上方，所以AUC 的取值范围在 0.5 和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而AUC作为一个数值，可以更清楚的说明对应AUC更大的分类器效果更好。</p>
+<p><a href="https://www.douban.com/note/284051363/?type=like" target="_blank" rel="external">ROC和AUC详解</a></p>
 
       
     </div>
@@ -370,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C-小知识/" rel="tag"># C++小知识</a>
+            <a href="/tags/Machine-Learning小知识/" rel="tag"># Machine Learning小知识</a>
           
         </div>
       
@@ -379,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/29/essay6/" rel="next" title="有些话适合说给自己听">
-                <i class="fa fa-chevron-left"></i> 有些话适合说给自己听
+              <a href="/2016/12/01/c1/" rel="next" title="C++小知识之指针">
+                <i class="fa fa-chevron-left"></i> C++小知识之指针
               </a>
             
           </div>
@@ -389,8 +423,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/02/m2/" rel="prev" title="Machine Learning小知识之ROC和ACU">
-                Machine Learning小知识之ROC和ACU <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/02/m1/" rel="prev" title="Machine Learning小知识之TP-FP-TN-FN">
+                Machine Learning小知识之TP-FP-TN-FN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -438,8 +472,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -534,6 +577,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC"><span class="nav-number">1.</span> <span class="nav-text">ROC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AUC"><span class="nav-number">2.</span> <span class="nav-text">AUC</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
