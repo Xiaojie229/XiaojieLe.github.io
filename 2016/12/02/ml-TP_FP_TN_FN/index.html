@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Machine Learning小知识," />
 
 
 
@@ -84,16 +84,43 @@
 
 
 
+<meta name="description" content="对于一个二分类问题，就结果而言，会出现下面四种情况：
+
+
+实际为正样本：Postive(P)
+实际为负样本：Negative(N)
+事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类
+事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类
+事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类
+事实为负样本，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="等不到">
-<meta property="og:url" content="http://lxjdaydayup.cn/2016/11/27/essay4/index.html">
+<meta property="og:title" content="Machine Learning小知识之TP-FP-TN-FN">
+<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:image" content="http://lxjdaydayup.cn/images/essay41.jpg">
-<meta property="og:image" content="http://lxjdaydayup.cn/images/essay42.jpg">
-<meta property="og:updated_time" content="2016-12-02T15:25:20.000Z">
+<meta property="og:description" content="对于一个二分类问题，就结果而言，会出现下面四种情况：
+
+
+实际为正样本：Postive(P)
+实际为负样本：Negative(N)
+事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类
+事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类
+事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类
+事实为负样本，">
+<meta property="og:image" content="http://lxjdaydayup.cn/images/m11.png">
+<meta property="og:image" content="http://lxjdaydayup.cn/images/m12.png">
+<meta property="og:updated_time" content="2016-12-11T13:04:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="等不到">
-<meta name="twitter:image" content="http://lxjdaydayup.cn/images/essay41.jpg">
+<meta name="twitter:title" content="Machine Learning小知识之TP-FP-TN-FN">
+<meta name="twitter:description" content="对于一个二分类问题，就结果而言，会出现下面四种情况：
+
+
+实际为正样本：Postive(P)
+实际为负样本：Negative(N)
+事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类
+事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类
+事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类
+事实为负样本，">
+<meta name="twitter:image" content="http://lxjdaydayup.cn/images/m11.png">
 
 
 
@@ -121,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="http://lxjdaydayup.cn/2016/11/27/essay4/"/>
+  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/"/>
 
 
 
 
 
-  <title> 等不到 | MYSPACE </title>
+  <title> Machine Learning小知识之TP-FP-TN-FN | MYSPACE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +275,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/11/27/essay4/">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DayDayUp">
@@ -272,7 +299,7 @@
             
             
               
-                等不到
+                Machine Learning小知识之TP-FP-TN-FN
               
             
           </h1>
@@ -285,8 +312,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-27T00:00:00+08:00">
-                2016-11-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T00:00:00+08:00">
+                2016-12-02
               </time>
             
 
@@ -304,8 +331,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -319,8 +346,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/27/essay4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/essay4/" itemprop="commentCount"></span>
+                <a href="/2016/12/02/ml-TP_FP_TN_FN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/ml-TP_FP_TN_FN/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -346,16 +373,53 @@
       
 
       
-        <p><img src="/images/essay41.jpg" alt=""><br><a id="more"></a></p>
+        <p>对于一个二分类问题，就结果而言，会出现下面四种情况：</p>
+<p><img src="/images/m11.png" alt=""></p>
+<ul>
+<li>实际为正样本：Postive(P)</li>
+<li>实际为负样本：Negative(N)</li>
+<li>事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类</li>
+<li>事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类</li>
+<li>事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类</li>
+<li>事实为负样本，却被判定为正样本：False Positive(FP)，错误划分为正类</li>
+</ul>
+<a id="more"></a>
+<p>也可用表格表示，如下：</p>
+<p><img src="images/m12.png" alt=""></p>
+<p><strong>根据这四种情况，定义如下的几种评价指标：</strong></p>
+<ol>
+<li><p>正确率(accuracy)</p>
+<p>accuracy = (TP + TN) / (P+N)，表示所有样本中都被正确分类的样本所占的比率，正确率越高，分类器越好；</p>
+</li>
+<li><p>错误率(error rate)</p>
+<p>error rate = (FP + FN) / (P + N)，与正确率相对应，accuracy = 1 - erros rate；</p>
+</li>
+<li><p>灵敏度(sensitive,TPR)</p>
+<p>sensitive = TP / P，表示所有正样本中被正确划分的比例，衡量分类器对正样本的识别能力，也被称为真正类率(True Positive Rate, TPR);</p>
+</li>
+<li><p>负正类率(False Positive Rate, FPR)</p>
+<p>FPR = FP / (FP + TN), 计算的是分类器错认为正样本的负实例占所有负实例的比例。</p>
+</li>
+<li><p>特效度(specificity,TNR)</p>
+<p>specitive = TN / N = 1 - FPR，表示所有负样本被正确划分的比例，衡量分类器对负样本的识别能力，也被称为真负类率(True Negative Rate，TNR)；</p>
+</li>
+<li><p>miss rate(False Negative Rate, FNR) </p>
+<p>miss rate = FN / (FN + TP)，表示分类器错认为负样本的正实例占所有正实例的比例。</p>
+</li>
+<li><p>精度(precision)</p>
+<p>precision = TP / (TP + FP)，表示被分为正样本中实际为正样本的比例；</p>
+</li>
+<li><p>召回率(recall)</p>
+<p>recall = TP / (TP + FN) = TP / P = sensitive，表示有多少个正样本被正确分类；</p>
+</li>
+</ol>
 <blockquote>
-<p>作者: 亢师</p>
+<p>参考: </p>
+<blockquote>
+<p><a href="http://www.bubuko.com/infodetail-1136574.html" target="_blank" rel="external">http://www.bubuko.com/infodetail-1136574.html</a></p>
+<p><a href="http://www.mamicode.com/info-detail-1202377.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1202377.html</a></p>
 </blockquote>
-<p>我没想到遇见你只是一个《意外》，<br>就在看到你的那一刻，<br>我觉得《我好像在哪见过你》，</p>
-<p>为了能陪在你身边我像《绅士》一样，<br>然而我只是一个《初学者》，<br>我不会像《演员》一样熟练的表演，<br>为了能和你《来日方长》，<br>我把你我的距离控制的《刚刚好》，</p>
-<p>当你提出分手之后，<br>在夜深人静的时候我为你写了《认真的雪》，<br>这个冬天又下起了雪，<br>我用《续雪》怀念过去几年的故事，</p>
-<p>《为了遇见你》我已经很努力，<br>《你还要我怎样》？<br>难道就只是因为我是个《丑八怪》?</p>
-<p><img src="/images/essay42.jpg" alt=""></p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32507038&auto=1&height=66"></iframe>
+</blockquote>
 
       
     </div>
@@ -377,6 +441,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning小知识/" rel="tag"># Machine Learning小知识</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -388,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/27/essay1/" rel="prev" title="心中雅量，一生幸福">
-                心中雅量，一生幸福 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/04/go-install_gotour/" rel="prev" title="Go小知识之安装与环境设置">
+                Go小知识之安装与环境设置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -405,10 +475,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/27/essay4/"
-     data-title="等不到"
+        <div class="ds-share flat" data-thread-key="2016/12/02/ml-TP_FP_TN_FN/"
+     data-title="Machine Learning小知识之TP-FP-TN-FN"
      data-content=""
-     data-url="http://lxjdaydayup.cn/2016/11/27/essay4/">
+     data-url="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -435,8 +505,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/27/essay4/"
-           data-title="等不到" data-url="http://lxjdaydayup.cn/2016/11/27/essay4/">
+      <div class="ds-thread" data-thread-key="2016/12/02/ml-TP_FP_TN_FN/"
+           data-title="Machine Learning小知识之TP-FP-TN-FN" data-url="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/">
       </div>
     
   </div>
@@ -472,7 +542,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -480,7 +550,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -489,7 +559,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
