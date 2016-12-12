@@ -84,43 +84,19 @@
 
 
 
-<meta name="description" content="对于一个二分类问题，就结果而言，会出现下面四种情况：
-
-
-实际为正样本：Postive(P)
-实际为负样本：Negative(N)
-事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类
-事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类
-事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类
-事实为负样本，">
+<meta name="description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning小知识之TP-FP-TN-FN">
-<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/index.html">
+<meta property="og:title" content="Machine Learning小知识之ROC和ACU">
+<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/02/ml-ROC_and_ACU/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:description" content="对于一个二分类问题，就结果而言，会出现下面四种情况：
-
-
-实际为正样本：Postive(P)
-实际为负样本：Negative(N)
-事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类
-事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类
-事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类
-事实为负样本，">
-<meta property="og:image" content="http://lxjdaydayup.cn/images/m11.png">
+<meta property="og:description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
 <meta property="og:image" content="http://lxjdaydayup.cn/images/m12.png">
-<meta property="og:updated_time" content="2016-12-11T13:04:12.000Z">
+<meta property="og:image" content="http://lxjdaydayup.cn/images/m21.jpg">
+<meta property="og:updated_time" content="2016-12-12T04:07:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Machine Learning小知识之TP-FP-TN-FN">
-<meta name="twitter:description" content="对于一个二分类问题，就结果而言，会出现下面四种情况：
-
-
-实际为正样本：Postive(P)
-实际为负样本：Negative(N)
-事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类
-事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类
-事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类
-事实为负样本，">
-<meta name="twitter:image" content="http://lxjdaydayup.cn/images/m11.png">
+<meta name="twitter:title" content="Machine Learning小知识之ROC和ACU">
+<meta name="twitter:description" content="ROCROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：">
+<meta name="twitter:image" content="http://lxjdaydayup.cn/images/m12.png">
 
 
 
@@ -148,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/"/>
+  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/02/ml-ROC_and_ACU/"/>
 
 
 
 
 
-  <title> Machine Learning小知识之TP-FP-TN-FN | MYSPACE </title>
+  <title> Machine Learning小知识之ROC和ACU | MYSPACE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/02/ml-ROC_and_ACU/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DayDayUp">
@@ -299,7 +275,7 @@
             
             
               
-                Machine Learning小知识之TP-FP-TN-FN
+                Machine Learning小知识之ROC和ACU
               
             
           </h1>
@@ -346,8 +322,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/02/ml-TP_FP_TN_FN/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/ml-TP_FP_TN_FN/" itemprop="commentCount"></span>
+                <a href="/2016/12/02/ml-ROC_and_ACU/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/ml-ROC_and_ACU/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -373,53 +349,45 @@
       
 
       
-        <p>对于一个二分类问题，就结果而言，会出现下面四种情况：</p>
-<p><img src="/images/m11.png" alt=""></p>
-<ul>
-<li>实际为正样本：Postive(P)</li>
-<li>实际为负样本：Negative(N)</li>
-<li>事实为正样本，也被判定为正样本：True Positive(TP)，正确划分为正类</li>
-<li>事实为正样本，却被判定为负样本：False Negative(FN)，错误划分为负类</li>
-<li>事实为负样本，也被判定为负样本：True Negative(TN)，正确划分为负类</li>
-<li>事实为负样本，却被判定为正样本：False Positive(FP)，错误划分为正类</li>
-</ul>
+        <h3 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h3><p>ROC曲线即受试者工作特征曲线(Receiver Operating Characteristic Analysis)，也被称为感受性曲线(sensitivity curve)，是一种用来衡量分类算法且图示它们性能的曲线。与传统的准确率相比，ROC分析更能够全面地描述分类算法的分类性能，具有以下几个优点：</p>
 <a id="more"></a>
-<p>也可用表格表示，如下：</p>
-<p><img src="images/m12.png" alt=""></p>
-<p><strong>根据这四种情况，定义如下的几种评价指标：</strong></p>
 <ol>
-<li><p>正确率(accuracy)</p>
-<p>accuracy = (TP + TN) / (P+N)，表示所有样本中都被正确分类的样本所占的比率，正确率越高，分类器越好；</p>
-</li>
-<li><p>错误率(error rate)</p>
-<p>error rate = (FP + FN) / (P + N)，与正确率相对应，accuracy = 1 - erros rate；</p>
-</li>
-<li><p>灵敏度(sensitive,TPR)</p>
-<p>sensitive = TP / P，表示所有正样本中被正确划分的比例，衡量分类器对正样本的识别能力，也被称为真正类率(True Positive Rate, TPR);</p>
-</li>
-<li><p>负正类率(False Positive Rate, FPR)</p>
-<p>FPR = FP / (FP + TN), 计算的是分类器错认为正样本的负实例占所有负实例的比例。</p>
-</li>
-<li><p>特效度(specificity,TNR)</p>
-<p>specitive = TN / N = 1 - FPR，表示所有负样本被正确划分的比例，衡量分类器对负样本的识别能力，也被称为真负类率(True Negative Rate，TNR)；</p>
-</li>
-<li><p>miss rate(False Negative Rate, FNR) </p>
-<p>miss rate = FN / (FN + TP)，表示分类器错认为负样本的正实例占所有正实例的比例。</p>
-</li>
-<li><p>精度(precision)</p>
-<p>precision = TP / (TP + FP)，表示被分为正样本中实际为正样本的比例；</p>
-</li>
-<li><p>召回率(recall)</p>
-<p>recall = TP / (TP + FN) = TP / P = sensitive，表示有多少个正样本被正确分类；</p>
-</li>
+<li>充分利用了预测得到的概率值。</li>
+<li>给出不同类的不同分布情况差别，即当是不平衡数据时，不同的数据分布，将得到不同的分类结果，而准确率评估则默认所有数据集都是平衡数据集。</li>
+<li>考虑了不同种类错误分类代价的不同，而准确率评估默认所有的错误代价都是相同的，这在现实生活中是不切实际的。</li>
+<li>二分类的ROC曲线通过斜率反映了正例和反例之间的重要关系，同时也反映出类的分布和代价之间的关系。</li>
+<li>可以使分类器的评估结果用曲线的形式更直观地展示在二维空间中。</li>
 </ol>
-<blockquote>
-<p>参考: </p>
-<blockquote>
-<p><a href="http://www.bubuko.com/infodetail-1136574.html" target="_blank" rel="external">http://www.bubuko.com/infodetail-1136574.html</a></p>
-<p><a href="http://www.mamicode.com/info-detail-1202377.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1202377.html</a></p>
-</blockquote>
-</blockquote>
+<p>对于二分类问题，有下面的混淆矩阵：</p>
+<p><img src="images/m12.png" alt=""></p>
+<p>由混淆矩阵可得出下面的二类别概率矩阵:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">P</th>
+<th style="text-align:center">N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>T</strong></td>
+<td style="text-align:center">TPR</td>
+<td style="text-align:center">FPR</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>F</strong></td>
+<td style="text-align:center">FNR</td>
+<td style="text-align:center">TNR</td>
+</tr>
+</tbody>
+</table>
+<p>在逻辑上，显然可以得出：TPR = 1 - FNR，FPR = 1 - TNR.</p>
+<p>ROC曲线是以FPR为横轴，TPR为纵轴，横轴与纵轴长度相等，为单位1，形成一个正方形的二维空间，在此二维空间中将各个(FPR,TPR)点标出，用直线连接各相邻两点构建而成的一条曲线。</p>
+<p>对一个于概率分类器，通过设置一个阈值 <em>t</em>  可以将概率分类器用做一个离散分类器：如果概率分类器对实例 <em>i</em> 的预测结果大于阈值 <em>t</em>  时，实例 <em>i</em>  被划分为正例，否则被划分为负例，当所有实例被处理完后，便会在ROC空间中产生一个点。那么如果让阈值 <em>t</em>  不断变化，就会产生无数的点，将这些点连接起来就形成了一条曲线。理论上阈值 <em>t</em>  可以在 -inf 和 +inf 之间取值，但概率分类器对实例的预测值在 0 到 1 之间，一般取实例 <em>i</em>  属于正例的分类器预测值 <em>f(i)</em> 的最小值和最大值作为阈值 <em>t</em>  取值范围的上限和下限。</p>
+<p><img src="images/m21.jpg" alt=""></p>
+<h3 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h3><p>AUC(Area Under Curve)被定义为ROC曲线下的面积，显然这个面积的数值不会大于 1。又由于ROC曲线一般都处于 y = x 这条直线的上方，所以AUC 的取值范围在 0.5 和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而AUC作为一个数值，可以更清楚的说明对应AUC更大的分类器效果更好。</p>
+<p><a href="https://www.douban.com/note/284051363/?type=like" target="_blank" rel="external">ROC和AUC详解</a></p>
 
       
     </div>
@@ -452,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/01/cpp-pointer/" rel="next" title="C++小知识之指针">
-                <i class="fa fa-chevron-left"></i> C++小知识之指针
+              <a href="/2016/12/02/ml-TP_FP_TN_FN/" rel="next" title="Machine Learning小知识之TP-FP-TN-FN">
+                <i class="fa fa-chevron-left"></i> Machine Learning小知识之TP-FP-TN-FN
               </a>
             
           </div>
@@ -462,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/02/ml-ROC_and_ACU/" rel="prev" title="Machine Learning小知识之ROC和ACU">
-                Machine Learning小知识之ROC和ACU <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/03/cpp-express_ transform/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -479,10 +447,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/02/ml-TP_FP_TN_FN/"
-     data-title="Machine Learning小知识之TP-FP-TN-FN"
+        <div class="ds-share flat" data-thread-key="2016/12/02/ml-ROC_and_ACU/"
+     data-title="Machine Learning小知识之ROC和ACU"
      data-content=""
-     data-url="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/">
+     data-url="http://lxjdaydayup.cn/2016/12/02/ml-ROC_and_ACU/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -509,8 +477,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/02/ml-TP_FP_TN_FN/"
-           data-title="Machine Learning小知识之TP-FP-TN-FN" data-url="http://lxjdaydayup.cn/2016/12/02/ml-TP_FP_TN_FN/">
+      <div class="ds-thread" data-thread-key="2016/12/02/ml-ROC_and_ACU/"
+           data-title="Machine Learning小知识之ROC和ACU" data-url="http://lxjdaydayup.cn/2016/12/02/ml-ROC_and_ACU/">
       </div>
     
   </div>
@@ -534,8 +502,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -630,6 +607,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC"><span class="nav-number">1.</span> <span class="nav-text">ROC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AUC"><span class="nav-number">2.</span> <span class="nav-text">AUC</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
