@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C++小知识," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="知足者常乐，能忍者自安">
+<meta name="description" content="指针数组，数组指针，函数指针
+123int (*a)[10]	//数组指针，指向数组的指针int *a[10]		//指针数组，数组存放的是一个指针bool (*a)(int)	//函数指针，指向一个返回bool，参数为int的函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MYSPACE">
+<meta property="og:title" content="C++小知识之指针">
 <meta property="og:url" content="http://lxjdaydayup.cn/2016/12/13/cpp-pointer/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:description" content="知足者常乐，能忍者自安">
-<meta property="og:updated_time" content="2016-12-13T15:14:50.000Z">
+<meta property="og:description" content="指针数组，数组指针，函数指针
+123int (*a)[10]	//数组指针，指向数组的指针int *a[10]		//指针数组，数组存放的是一个指针bool (*a)(int)	//函数指针，指向一个返回bool，参数为int的函数">
+<meta property="og:updated_time" content="2016-12-14T15:32:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MYSPACE">
-<meta name="twitter:description" content="知足者常乐，能忍者自安">
+<meta name="twitter:title" content="C++小知识之指针">
+<meta name="twitter:description" content="指针数组，数组指针，函数指针
+123int (*a)[10]	//数组指针，指向数组的指针int *a[10]		//指针数组，数组存放的是一个指针bool (*a)(int)	//函数指针，指向一个返回bool，参数为int的函数">
 
 
 
@@ -127,7 +130,7 @@
 
 
 
-  <title>  | MYSPACE </title>
+  <title> C++小知识之指针 | MYSPACE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +275,7 @@
             
             
               
-                
+                C++小知识之指针
               
             
           </h1>
@@ -285,7 +288,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-13T23:14:50+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-13T00:00:00+08:00">
                 2016-12-13
               </time>
             
@@ -295,6 +298,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -328,7 +349,24 @@
       
 
       
-        
+        <ol>
+<li><p>指针数组，数组指针，函数指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> (*a)[<span class="number">10</span>]	<span class="comment">//数组指针，指向数组的指针</span></div><div class="line"><span class="keyword">int</span> *a[<span class="number">10</span>]		<span class="comment">//指针数组，数组存放的是一个指针</span></div><div class="line"><span class="keyword">bool</span> (*a)(<span class="keyword">int</span>)	<span class="comment">//函数指针，指向一个返回bool，参数为int的函数</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+</li>
+<li><p>常量指针与指针常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p	<span class="comment">//指向数据类型为常量的指针，即底层const，等价于 `int const *p`</span></div><div class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p	<span class="comment">//指向整形数据的常量指针，即顶层const</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>指针和数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//一维数组</span></div><div class="line">a[i] = *(a+i)</div><div class="line">a = &amp;a[<span class="number">0</span>],	a+<span class="number">1</span> = &amp;a[<span class="number">1</span>]</div><div class="line">*a = a[<span class="number">0</span>],	*(a+<span class="number">1</span>) = a[<span class="number">1</span>]</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">a[<span class="number">0</span>] = &amp;a[<span class="number">0</span>][<span class="number">0</span>]，	a[<span class="number">1</span>] = &amp;a[<span class="number">1</span>][<span class="number">0</span>],	a[<span class="number">1</span>]+<span class="number">1</span> = &amp;a[<span class="number">1</span>][<span class="number">1</span>]</div><div class="line">*a[<span class="number">0</span>]  = a[<span class="number">0</span>][<span class="number">0</span>],	*a[<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">0</span>],	*(a[<span class="number">1</span>]+<span class="number">1</span>) = a[<span class="number">1</span>][<span class="number">1</span>]</div></pre></td></tr></table></figure>
+</li>
+<li><p>大多数表达式中，使用数组类型的对象名称其实就是使用一个指向该数组首元素的指针(编译器会做这种转换)。但是要注意数组对象名称是一个<strong>常量指针</strong>，不能对其进行赋值，++等操作。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</div><div class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ia2</span><span class="params">(ia)</span></span>;	<span class="comment">//ia2是一个整形指针，指向ia的第一个元素</span></div><div class="line">ia++;	<span class="comment">//错误！常量指针不能进行++操作</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a href="https://github.com/xuelangZF/CS_Offer/blob/master/C%2B%2B/Pointer.md" target="_blank" rel="external">详解1</a></p>
+<p><a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">详解2</a></p>
+
       
     </div>
 
@@ -349,6 +387,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/C-小知识/" rel="tag"># C++小知识</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -364,6 +408,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/12/14/cpp-switch/" rel="prev" title="C++小知识之switch">
+                C++小知识之switch <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -378,7 +426,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/12/13/cpp-pointer/"
-     data-title=""
+     data-title="C++小知识之指针"
      data-content=""
      data-url="http://lxjdaydayup.cn/2016/12/13/cpp-pointer/">
   <div class="ds-share-inline">
@@ -408,7 +456,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/12/13/cpp-pointer/"
-           data-title="" data-url="http://lxjdaydayup.cn/2016/12/13/cpp-pointer/">
+           data-title="C++小知识之指针" data-url="http://lxjdaydayup.cn/2016/12/13/cpp-pointer/">
       </div>
     
   </div>
@@ -444,7 +492,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

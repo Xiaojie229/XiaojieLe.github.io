@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Go小知识," />
+  <meta name="keywords" content="C++小知识," />
 
 
 
@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="下载与安装Go
-根据操作系统下载相应安装包，进行安装，安装完成后按照相应提示设置环境变量。">
+<meta name="description" content="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。
+123456789101112switch (expr)&amp;#123;  case constexpr:  	do something;  	break;  case constexpr:  	do something;  	break;  case constexpr:  	do s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go小知识之安装与环境设置">
-<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/04/go-install_gotour/index.html">
+<meta property="og:title" content="C++小知识之switch">
+<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/14/cpp-switch/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:description" content="下载与安装Go
-根据操作系统下载相应安装包，进行安装，安装完成后按照相应提示设置环境变量。">
-<meta property="og:updated_time" content="2016-12-13T13:44:55.000Z">
+<meta property="og:description" content="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。
+123456789101112switch (expr)&amp;#123;  case constexpr:  	do something;  	break;  case constexpr:  	do something;  	break;  case constexpr:  	do s">
+<meta property="og:updated_time" content="2016-12-14T16:09:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go小知识之安装与环境设置">
-<meta name="twitter:description" content="下载与安装Go
-根据操作系统下载相应安装包，进行安装，安装完成后按照相应提示设置环境变量。">
+<meta name="twitter:title" content="C++小知识之switch">
+<meta name="twitter:description" content="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。
+123456789101112switch (expr)&amp;#123;  case constexpr:  	do something;  	break;  case constexpr:  	do something;  	break;  case constexpr:  	do s">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/04/go-install_gotour/"/>
+  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/14/cpp-switch/"/>
 
 
 
 
 
-  <title> Go小知识之安装与环境设置 | MYSPACE </title>
+  <title> C++小知识之switch | MYSPACE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/04/go-install_gotour/">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/14/cpp-switch/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DayDayUp">
@@ -275,7 +275,7 @@
             
             
               
-                Go小知识之安装与环境设置
+                C++小知识之switch
               
             
           </h1>
@@ -288,8 +288,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T00:00:00+08:00">
-                2016-12-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">
+                2016-12-14
               </time>
             
 
@@ -307,8 +307,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Go/" itemprop="url" rel="index">
-                    <span itemprop="name">Go</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -322,8 +322,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/04/go-install_gotour/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/04/go-install_gotour/" itemprop="commentCount"></span>
+                <a href="/2016/12/14/cpp-switch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/14/cpp-switch/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -349,20 +349,15 @@
       
 
       
-        <p><a href="https://go-zh.org/doc/install" target="_blank" rel="external">下载与安装Go</a></p>
-<p>根据操作系统下载相应安装包，进行安装，安装完成后按照相应提示设置环境变量。</p>
-<a id="more"></a>
-<p>在windows下安装Go之后，添加环境变量：<code>PATH=c:\Go\bin;</code></p>
-<p>接着设置GOROOT，即为按装路径<code>GOROOT=C:\Go</code></p>
-<p>Go的运行还需设置一个GOPATH的环境变量，指向工作空间。</p>
-<p>接下来安装go-tour,安装命令如下：</p>
-<p><code>go get github.com/Go-zh/tour/gotour</code></p>
-<p>假设安装在D:\Go目录下，要运行gotour还需设置工作空间指向安装目录，即：<code>GOPATH=D:\Go</code></p>
-<p>之后在D:\Go\bin下用命令行运行如下命令：<code>gotour.exe</code></p>
-<p>然后再浏览器中输入<a href="http://127.0.0.1:3999，即可进入离线go-tour教程" target="_blank" rel="external">http://127.0.0.1:3999，即可进入离线go-tour教程</a></p>
+        <a id="more"></a>
+<p>switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (expr)&#123;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  	<span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  	<span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>switch语句首先对括号里的表达式求值，该表达式紧跟在关键字switch的后面，可以是一个初始化的变量声明。</p>
+<p>如果表达式和某个case标签的值匹配成功，程序从该标签之后的第一条语句开始执行，直到到达了switch的结尾或者是遇到一条break语句为止。</p>
 <blockquote>
-<p>附上一个<a href="http://blog.csdn.net/tianzhaixing2013/article/details/52938401" target="_blank" rel="external">go-tour代码链接</a></p>
+<p>尽管switch语句不是非得在最后一个标签后面写上break,但是为了安全起见，最好这么做。因为这样做的话，即使以后再增加新的case分支，也不用再在前面补充break语句了。</p>
 </blockquote>
+<p>如果没有任何一个case能匹配上switch 表达式的值，程序将执行紧跟在<strong>default</strong>后面的语句。</p>
 
       
     </div>
@@ -386,7 +381,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Go小知识/" rel="tag"># Go小知识</a>
+            <a href="/tags/C-小知识/" rel="tag"># C++小知识</a>
           
         </div>
       
@@ -395,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/03/cpp-express_ transform/" rel="next" title="C++小知识之中缀表达式转后缀表达式">
-                <i class="fa fa-chevron-left"></i> C++小知识之中缀表达式转后缀表达式
+              <a href="/2016/12/13/cpp-pointer/" rel="next" title="C++小知识之指针">
+                <i class="fa fa-chevron-left"></i> C++小知识之指针
               </a>
             
           </div>
@@ -404,10 +399,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/13/cpp-pointer/" rel="prev" title="C++小知识之指针">
-                C++小知识之指针 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -422,10 +413,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/04/go-install_gotour/"
-     data-title="Go小知识之安装与环境设置"
+        <div class="ds-share flat" data-thread-key="2016/12/14/cpp-switch/"
+     data-title="C++小知识之switch"
      data-content=""
-     data-url="http://lxjdaydayup.cn/2016/12/04/go-install_gotour/">
+     data-url="http://lxjdaydayup.cn/2016/12/14/cpp-switch/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -452,8 +443,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/04/go-install_gotour/"
-           data-title="Go小知识之安装与环境设置" data-url="http://lxjdaydayup.cn/2016/12/04/go-install_gotour/">
+      <div class="ds-thread" data-thread-key="2016/12/14/cpp-switch/"
+           data-title="C++小知识之switch" data-url="http://lxjdaydayup.cn/2016/12/14/cpp-switch/">
       </div>
     
   </div>
