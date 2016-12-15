@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。123456789101112switch (expr)&amp;#123;  case constexpr:  	do something;  	break;  case constexpr:  	do something;  	break;  case constexpr:  	do so">
+<meta name="description" content="switch语句(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++小知识之switch">
 <meta property="og:url" content="http://lxjdaydayup.cn/2016/12/14/cpp-switch/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:description" content="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。123456789101112switch (expr)&amp;#123;  case constexpr:  	do something;  	break;  case constexpr:  	do something;  	break;  case constexpr:  	do so">
-<meta property="og:updated_time" content="2016-12-15T02:38:20.000Z">
+<meta property="og:description" content="switch语句(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。">
+<meta property="og:updated_time" content="2016-12-15T15:19:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++小知识之switch">
-<meta name="twitter:description" content="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。123456789101112switch (expr)&amp;#123;  case constexpr:  	do something;  	break;  case constexpr:  	do something;  	break;  case constexpr:  	do so">
+<meta name="twitter:description" content="switch语句(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。">
 
 
 
@@ -346,14 +346,15 @@
       
 
       
-        <a id="more"></a>
-<h2 id="switch语句-switch-statement-提供一条便利的途径使得我们能够在若干固定选项中做出选择。"><a href="#switch语句-switch-statement-提供一条便利的途径使得我们能够在若干固定选项中做出选择。" class="headerlink" title="switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。"></a>switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (expr)&#123;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  	<span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  	<span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p><strong>switch语句</strong>(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。</p>
+<a id="more"></a>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (expr)&#123;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  	<span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  	<span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> <span class="keyword">constexpr</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">  	<span class="keyword">do</span> something;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>switch语句首先对括号里的表达式求值，该表达式紧跟在关键字switch的后面，可以是一个初始化的变量声明。</p>
 <p>如果表达式和某个case标签的值匹配成功，程序从该标签之后的第一条语句开始执行，直到到达了switch的结尾或者是遇到一条break语句为止。</p>
 <blockquote>
 <p>尽管switch语句不是非得在最后一个标签后面写上break,但是为了安全起见，最好这么做。因为这样做的话，即使以后再增加新的case分支，也不用再在前面补充break语句了。</p>
 </blockquote>
-<p>如果没有任何一个case能匹配上switch 表达式的值，程序将执行紧跟在<strong>default</strong>后面的语句。</p>
+<p>如果没有任何一个case能匹配上switch 表达式的值，程序将执行紧跟在<strong>default</strong>后面的语句。default即使放在前面也是先匹配case,在所有的case都不能正确匹配后再执行default语句。</p>
 
       
     </div>
@@ -464,17 +465,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -569,22 +561,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#switch语句-switch-statement-提供一条便利的途径使得我们能够在若干固定选项中做出选择。"><span class="nav-number">1.</span> <span class="nav-text">switch语句**(switch statement)提供一条便利的途径使得我们能够在若干固定选项中做出选择。</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
