@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="深度好文," />
+  <meta name="keywords" content="Go小知识," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
+<meta name="description" content="append()
+1234567mySlice := make([]int,5,10)mySlice = append(mySlice,1,2,3)	//实现在切片后面添加元素//append()的第二个参数是一个不定参数，我们可以根据需要添加若干个元素，也可以直接将一个切片追加到另一个切片的末尾。mySlice2 := []int&amp;#123;8,9,10&amp;#125;mySlice=append">
 <meta property="og:type" content="article">
-<meta property="og:title" content="慎独">
-<meta property="og:url" content="http://lxjdaydayup.cn/2016/11/27/essay-alone/index.html">
+<meta property="og:title" content="Go小知识之注意事项">
+<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/26/go-tips/index.html">
 <meta property="og:site_name" content="MYSPACE">
-<meta property="og:image" content="http://lxjdaydayup.cn/images/essay2.jpg">
-<meta property="og:updated_time" content="2016-12-12T04:06:45.000Z">
+<meta property="og:description" content="append()
+1234567mySlice := make([]int,5,10)mySlice = append(mySlice,1,2,3)	//实现在切片后面添加元素//append()的第二个参数是一个不定参数，我们可以根据需要添加若干个元素，也可以直接将一个切片追加到另一个切片的末尾。mySlice2 := []int&amp;#123;8,9,10&amp;#125;mySlice=append">
+<meta property="og:updated_time" content="2016-12-26T14:40:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="慎独">
-<meta name="twitter:image" content="http://lxjdaydayup.cn/images/essay2.jpg">
+<meta name="twitter:title" content="Go小知识之注意事项">
+<meta name="twitter:description" content="append()
+1234567mySlice := make([]int,5,10)mySlice = append(mySlice,1,2,3)	//实现在切片后面添加元素//append()的第二个参数是一个不定参数，我们可以根据需要添加若干个元素，也可以直接将一个切片追加到另一个切片的末尾。mySlice2 := []int&amp;#123;8,9,10&amp;#125;mySlice=append">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://lxjdaydayup.cn/2016/11/27/essay-alone/"/>
+  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/26/go-tips/"/>
 
 
 
 
 
-  <title> 慎独 | MYSPACE </title>
+  <title> Go小知识之注意事项 | MYSPACE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -247,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/11/27/essay-alone/">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/26/go-tips/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DayDayUp">
@@ -271,7 +275,7 @@
             
             
               
-                慎独
+                Go小知识之注意事项
               
             
           </h1>
@@ -284,8 +288,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-27T00:00:00+08:00">
-                2016-11-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-26T00:00:00+08:00">
+                2016-12-26
               </time>
             
 
@@ -303,8 +307,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/Go/" itemprop="url" rel="index">
+                    <span itemprop="name">Go</span>
                   </a>
                 </span>
 
@@ -318,8 +322,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/27/essay-alone/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/essay-alone/" itemprop="commentCount"></span>
+                <a href="/2016/12/26/go-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/26/go-tips/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -345,19 +349,33 @@
       
 
       
-        <p><img src="/images/essay2.jpg" alt="essay2"></p>
+        <ol>
+<li><p>append()</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mySlice := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">5</span>,<span class="number">10</span>)</div><div class="line">mySlice = <span class="built_in">append</span>(mySlice,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)	<span class="comment">//实现在切片后面添加元素</span></div><div class="line"><span class="comment">//append()的第二个参数是一个不定参数，我们可以根据需要添加若干个元素，也可以直接将一个切片追加到另一个切片的末尾。</span></div><div class="line">mySlice2 := []<span class="keyword">int</span>&#123;<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;</div><div class="line">mySlice=<span class="built_in">append</span>(mySlice,mySlice2...)</div><div class="line"><span class="comment">//需要注意的是第二个参数后面的三个点，是一个省略号，如果没有则会编译出错。因为mySlice中的元素是int,所以直接传递mySlice2行不通，加上省略号相当于把mySlice2包含的所有元素打散后传入，等价于下面：</span></div><div class="line">mySlice = <span class="built_in">append</span>(mySlice,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="慎言"><a href="#慎言" class="headerlink" title="慎言"></a>慎言</h3><p>俗话说，“慎言以养其德，节食以养其体”、<br>“修己以清心为要，涉世以慎言为先”、<br>“良言一句三冬暖，恶语伤人六月寒”、<br>“说者无心、听者有意”、<br>“祸从口出，患从口入”……<br>无不体现“慎言”的智慧和“口无遮拦”的后果。</p>
-<h3 id="慎行"><a href="#慎行" class="headerlink" title="慎行"></a>慎行</h3><p>慎行是一种风度，<br>也是一种潇洒和坦荡。<br>“行谨则能坚其志，言谨则能崇其德”、<br>“言必信，行必果”，<br>“慎行”无疑体现的是一个人自强不息的意志，<br>懂得“慎行”的人肯定志存高远。</p>
-<h3 id="慎微"><a href="#慎微" class="headerlink" title="慎微"></a>慎微</h3><p>“慎微”不是小器之人的行为体现，<br>而是不忽视细节，<br>是对事物的一丝不苟的态度。<br>《老子》：“天下难事，必作于易；天下大事，必作于细。”<br>在一定条件下，细节往往决定成败，图大者，当谨于微。</p>
-<h3 id="慎独"><a href="#慎独" class="headerlink" title="慎独"></a>慎独</h3><p>天下熙熙，皆为利来；天下攘攘，皆为利往。<br>诱惑无处不在，<br>慎独，是面对美色的坐怀不乱，<br>是面对金钱以不贪为宝，<br>是面对不义之财以不占为本。</p>
-<h3 id="慎欲"><a href="#慎欲" class="headerlink" title="慎欲"></a>慎欲</h3><p>古人云:“欲虽不可尽，可以近尽也；欲虽不可去，求可节也。”<br>在追求个人欲望的过程中，应该时常保持知足常乐的心态，不做欲望的奴隶。正如老子所说:“知足不辱，知止不殆，可以长久。”</p>
-<h3 id="慎友"><a href="#慎友" class="headerlink" title="慎友"></a>慎友</h3><p>真正的朋友是一面镜子，照照镜子，就可以明白自己的缺点；<br>真正的朋友也是一本书，翻翻书页，就可以学有所悟、学有所获。<br>“近朱者赤，近墨者黑”，<br>人生中最大的悲哀莫过于交友不慎，<br>所以，交友一定要谨慎！</p>
-<h3 id="慎初"><a href="#慎初" class="headerlink" title="慎初"></a>慎初</h3><p>“勿以恶小而为之，勿以善小而不为”，这是一个举足轻重的问题，<br>善与恶只是一念之差、一步之遥。<br>迈出第一步都是艰难的，一旦迈出恶的一步，<br>最可能的结果是走向恶的深渊。</p>
-<h3 id="慎终"><a href="#慎终" class="headerlink" title="慎终"></a>慎终</h3><p>《老子》中言：“慎终如始，则无败事。”意思就是：“行百里者半九十”，<br>如果能始终如一，持之以恒，到最后还像开始的时候那么严格要求自己，那么他的一生就很平安，没有败事可言。</p>
-<blockquote>
-<p>本文转自<a href="http://mp.weixin.qq.com/s?__biz=MzI2MjMxNjAzNQ==&amp;mid=2247484986&amp;idx=1&amp;sn=0de586dea56310394ff0b24189a6d061&amp;chksm=ea4c4f56dd3bc640686b297e5bf7b83c49f970a17aa917d6c6dd918a83c59fcccac078286507&amp;mpshare=1&amp;scene=1&amp;srcid=112709uMNzcF3InCyburMsJp#rd" target="_blank" rel="external">微信公众号：心灵鸡汤之励志正能量</a></p>
-</blockquote>
+</li>
+<li><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>...<span class="keyword">else</span>...</div></pre></td></tr></table></figure>
+<p>在有返回值的函数中，不允许将“最终的”<code>return</code>语句包含在<code>if...else...</code>结构中，否则会编译失败，失败的原因在于，Go编译器无法找到终止函数的<code>return</code>语句。编译失败案例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">example</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</div><div class="line">  <span class="keyword">if</span> x == <span class="number">0</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">5</span></div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">return</span> x</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数</p>
+<ul>
+<li><p>定义</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(a,b <span class="keyword">int</span>)</span><span class="params">(ret <span class="keyword">int</span>, err error)</span></span>&#123;</div><div class="line">	<span class="comment">//...多返回值</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(a,b <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</div><div class="line">	<span class="comment">//...单返回值</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>小写字母开头的函数只在本包内可见，大写字母开头的函数才能被其他包使用，这个规则也适用于类型和变量的可见性</p>
+</li>
+<li><p>不定参数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">myfunc</span> <span class="params">(args ...<span class="keyword">int</span>)</span></span>&#123;</div><div class="line">  <span class="keyword">for</span> _,arg := <span class="keyword">range</span> args&#123;</div><div class="line">    fmt.Println(arg)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//该函数可接受类型为int的不定数量参数，如:</span></div><div class="line">myfunc(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</div><div class="line">myfunc(<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">13</span>)</div><div class="line"><span class="comment">//形如...type格式的类型只能作为函数的参数类型存在，并且必须是最后一个参数。</span></div><div class="line"><span class="comment">//从内部实现机理上来说，类型...type本质上是一个数组切片，也就是[]type。</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>可用<code>interface{}</code>传递任意类型数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Printf</span><span class="params">(format <span class="keyword">string</span>, args ...<span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</div><div class="line">  <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><a href="http://blog.csdn.net/wuwenxiang91322/article/details/9042503" target="_blank" rel="external">异常的处理 defer, panic, recover</a></p>
+</li>
+</ol>
 
       
     </div>
@@ -381,7 +399,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度好文/" rel="tag"># 深度好文</a>
+            <a href="/tags/Go小知识/" rel="tag"># Go小知识</a>
           
         </div>
       
@@ -390,8 +408,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/27/essay-/" rel="next" title="我努力得到的从来都是不是侥幸">
-                <i class="fa fa-chevron-left"></i> 我努力得到的从来都是不是侥幸
+              <a href="/2016/12/26/alg-qsort/" rel="next" title="Algorithm之Qsort(快速排序)">
+                <i class="fa fa-chevron-left"></i> Algorithm之Qsort(快速排序)
               </a>
             
           </div>
@@ -399,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/27/essay-waiting/" rel="prev" title="等不到">
-                等不到 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -417,10 +431,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/27/essay-alone/"
-     data-title="慎独"
+        <div class="ds-share flat" data-thread-key="2016/12/26/go-tips/"
+     data-title="Go小知识之注意事项"
      data-content=""
-     data-url="http://lxjdaydayup.cn/2016/11/27/essay-alone/">
+     data-url="http://lxjdaydayup.cn/2016/12/26/go-tips/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -447,8 +461,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/27/essay-alone/"
-           data-title="慎独" data-url="http://lxjdaydayup.cn/2016/11/27/essay-alone/">
+      <div class="ds-thread" data-thread-key="2016/12/26/go-tips/"
+           data-title="Go小知识之注意事项" data-url="http://lxjdaydayup.cn/2016/12/26/go-tips/">
       </div>
     
   </div>
@@ -472,17 +486,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -577,22 +582,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#慎言"><span class="nav-number">1.</span> <span class="nav-text">慎言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎行"><span class="nav-number">2.</span> <span class="nav-text">慎行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎微"><span class="nav-number">3.</span> <span class="nav-text">慎微</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎独"><span class="nav-number">4.</span> <span class="nav-text">慎独</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎欲"><span class="nav-number">5.</span> <span class="nav-text">慎欲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎友"><span class="nav-number">6.</span> <span class="nav-text">慎友</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎初"><span class="nav-number">7.</span> <span class="nav-text">慎初</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎终"><span class="nav-number">8.</span> <span class="nav-text">慎终</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
