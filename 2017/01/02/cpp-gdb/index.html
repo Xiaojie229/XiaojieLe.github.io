@@ -1,0 +1,819 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++小知识," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="GDB是UNIX下面的程序调试工具, 可以调试多种类型程序, 主要可以完成以下四个功能:
+
+启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。 
+可让被调试的程序在指定的调置的断点处停住。（断点可以是条件表达式）
+当程序被停住时，可以检查此时程序中所发生的事。
+动态的改变程序的执行环境。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++小知识之GDB">
+<meta property="og:url" content="http://lxjdaydayup.cn/2017/01/02/cpp-gdb/index.html">
+<meta property="og:site_name" content="MYSPACE">
+<meta property="og:description" content="GDB是UNIX下面的程序调试工具, 可以调试多种类型程序, 主要可以完成以下四个功能:
+
+启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。 
+可让被调试的程序在指定的调置的断点处停住。（断点可以是条件表达式）
+当程序被停住时，可以检查此时程序中所发生的事。
+动态的改变程序的执行环境。">
+<meta property="og:image" content="http://7xrlu9.com1.z0.glb.clouddn.com/C++_GDB_Debug_1.png">
+<meta property="og:updated_time" content="2017-01-02T15:17:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++小知识之GDB">
+<meta name="twitter:description" content="GDB是UNIX下面的程序调试工具, 可以调试多种类型程序, 主要可以完成以下四个功能:
+
+启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。 
+可让被调试的程序在指定的调置的断点处停住。（断点可以是条件表达式）
+当程序被停住时，可以检查此时程序中所发生的事。
+动态的改变程序的执行环境。">
+<meta name="twitter:image" content="http://7xrlu9.com1.z0.glb.clouddn.com/C++_GDB_Debug_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lxjdaydayup.cn/2017/01/02/cpp-gdb/"/>
+
+
+
+
+
+  <title> C++小知识之GDB | MYSPACE </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MYSPACE</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2017/01/02/cpp-gdb/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DayDayUp">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MYSPACE">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MYSPACE" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++小知识之GDB
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-02T00:00:00+08:00">
+                2017-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/02/cpp-gdb/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/02/cpp-gdb/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>GDB是UNIX下面的程序调试工具, 可以调试多种类型程序, 主要可以完成以下四个功能:</p>
+<ol>
+<li>启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。 </li>
+<li>可让被调试的程序在指定的调置的断点处停住。（断点可以是条件表达式）</li>
+<li>当程序被停住时，可以检查此时程序中所发生的事。</li>
+<li>动态的改变程序的执行环境。</li>
+</ol>
+<a id="more"></a>
+<h2 id="简单的调试例子"><a href="#简单的调试例子" class="headerlink" title="简单的调试例子"></a>简单的调试例子</h2><p>测试程序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">int func(int n)</div><div class="line">&#123;</div><div class="line">    int sum=0,i;</div><div class="line">    for(i=0; i&lt;n; i++)</div><div class="line">    &#123;</div><div class="line">        sum+=i;</div><div class="line">    &#125;</div><div class="line">    return sum;</div><div class="line">&#125;</div><div class="line">void main()</div><div class="line">&#123;</div><div class="line">    int i; long result = 0;</div><div class="line">    for(i=1; i&lt;=100; i++)</div><div class="line">    &#123;</div><div class="line">        result += i;</div><div class="line">    &#125;</div><div class="line">    printf(“result[1-100] = %d \n”, result );</div><div class="line">    printf(“result[1-250] = %d \n”, func(250) );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译生成执行文件（要调试C/C++的程序，在编译时必须要把调试信息加到可执行文件中：-g 选项）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -g C++_GDB_test.cpp -o C++_GDB_test.o</div></pre></td></tr></table></figure>
+<p>一个简单的调试过程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">$ gdb C++_GDB_test.o</div><div class="line">GNU gdb (GDB) 7.10.1</div><div class="line">......</div><div class="line">done.</div><div class="line">(gdb) l                    ----&gt; l(list), 列出源码</div><div class="line">6	*/</div><div class="line">7</div><div class="line">8	#include &lt;stdio.h&gt;</div><div class="line">9	int func(int n)</div><div class="line">10	&#123;</div><div class="line">11	    int sum=0,i;</div><div class="line">12	    for(i=0; i&lt;n; i++)</div><div class="line">13	    &#123;</div><div class="line">14	        sum+=i;</div><div class="line">15	    &#125;</div><div class="line">(gdb)                      ----&gt; 直接回车表示重复上一次命令</div><div class="line">16	    return sum;</div><div class="line">17	&#125;</div><div class="line">18	int main()</div><div class="line">19	&#123;</div><div class="line">20	    int i; long result = 0;</div><div class="line">21	    for(i=1; i&lt;=100; i++)</div><div class="line">22	    &#123;</div><div class="line">23	        result += i;</div><div class="line">24	    &#125;</div><div class="line">25	    printf(&quot;result[1-100] = %ld\n&quot;, result );</div><div class="line">(gdb)</div><div class="line">26	    printf(&quot;result[1-250] = %d\n&quot;, func(250));</div><div class="line">27	&#125;</div><div class="line">(gdb) br 20                 ----&gt; 设置断点，在源程序 20 行处</div><div class="line">Breakpoint 1 at 0x100000edf: file C++_GDB_test.cpp, line 20.</div><div class="line">(gdb) br func               ----&gt; 设置断点，在函数func()入口处</div><div class="line">Breakpoint 2 at 0x100000e97: file C++_GDB_test.cpp, line 11.</div><div class="line">(gdb) info br               ----&gt; 查看断点信息</div><div class="line">Num     Type           Disp Enb Address            What</div><div class="line">1       breakpoint     keep y   0x0000000100000edf in main() at C++_GDB_test.cpp:20</div><div class="line">2       breakpoint     keep y   0x0000000100000e97 in func(int) at C++_GDB_test.cpp:11</div><div class="line">(gdb) r                     ----&gt; r(run) 运行程序</div><div class="line">Starting program: .../C++_Code/C++_GDB_test.o</div><div class="line">Breakpoint 1, main () at C++_GDB_test.cpp:20  ----&gt; 在断点处停住</div><div class="line">20	    int i; long result = 0;</div><div class="line">(gdb) n                     ----&gt; n(next)单条语句执行</div><div class="line">21	    for(i=1; i&lt;=100; i++)</div><div class="line">(gdb) n</div><div class="line">23	        result += i;</div><div class="line">(gdb) n</div><div class="line">21	    for(i=1; i&lt;=100; i++)</div><div class="line">(gdb) c                     ----&gt; c(continue)继续运行程序到下一个断点</div><div class="line">Continuing.</div><div class="line">result[1-100] = 5050        ----&gt; 程序输出</div><div class="line"></div><div class="line">Breakpoint 2, func (n=250) at C++_GDB_test.cpp:11</div><div class="line">11	    int sum=0,i;</div><div class="line">(gdb) n</div><div class="line">12	    for(i=0; i&lt;n; i++)</div><div class="line">(gdb) br 14 if i==50        ----&gt; 设置条件断点</div><div class="line">Breakpoint 3 at 0x100000eb1: file C++_GDB_test.cpp, line 14.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line"></div><div class="line">Breakpoint 3, func (n=250) at C++_GDB_test.cpp:14</div><div class="line">14	        sum+=i;</div><div class="line">(gdb) p i                   ----&gt; p(print): 打印变量i的值</div><div class="line">$1 = 50</div><div class="line">(gdb) p sum                 ----&gt; p: 打印变量sum的值</div><div class="line">$2 = 1225</div><div class="line">(gdb) bt                    ----&gt; 查看函数堆栈</div><div class="line">#0  func (n=250) at C++_GDB_test.cpp:14</div><div class="line">#1  0x0000000100000f36 in main () at C++_GDB_test.cpp:26</div><div class="line">(gdb) finish                ----&gt; 退出函数</div><div class="line">Run till exit from #0  func (n=250) at C++_GDB_test.cpp:14</div><div class="line">0x0000000100000f36 in main () at C++_GDB_test.cpp:26</div><div class="line">26	    printf(&quot;result[1-250] = %d\n&quot;, func(250));</div><div class="line">Value returned is $6 = 31125</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">result[1-250] = 31125</div><div class="line">[Inferior 1 (process 8845) exited normally]   ----&gt; 程序退出，调试结束 </div><div class="line">(gdb) q</div></pre></td></tr></table></figure>
+<h2 id="core-dump-调试"><a href="#core-dump-调试" class="headerlink" title="core dump 调试"></a>core dump 调试</h2><p>当程序异常退出时，操作系统把程序当前的内存状况存储在一个core文件中，该文件包含了程序运行时的内存，寄存器状态，堆栈指针，内存管理信息还有各种函数调用堆栈信息等。通过分析这个文件，我们可以定位到程序异常退出的时候对应的堆栈调用等信息，找出问题所在并进行及时解决。</p>
+<p>首先要确定当前会话的 ulimit –c，若为0，则不会产生对应的coredump，需要进行修改和设置，<code>ulimit –c [size]</code>（注意，这里的size如果太小，则可能不会产生对应的core文件）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ulimit  -c unlimited  (可以产生core dump 且不受大小限制)</div></pre></td></tr></table></figure>
+<p>core文件默认的存储位置为当前进程的工作目录（一般就是可执行文件所在的目录）。当程序出现段错误（试图访问或者修改不属于自己的内存地址时）时，就会产生 core dump，方便我们进行调试。下面是一些常见的段错误：</p>
+<ul>
+<li>内存访问越界：由于使用错误的下标，导致数组访问越界。</li>
+<li>非法指针访问：比如写 nullptr</li>
+<li>栈溢出：使用了大的局部变量</li>
+</ul>
+<p>下面是个简单的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</div><div class="line">    *p = <span class="number">1</span>;             <span class="comment">// Segment Fault</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    test();</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后编译运行程序，用 GDB 查看其产生的 Core Dump 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ g++ -g demo.cpp -o demo.o -std=c++11</div><div class="line">$ <span class="built_in">ulimit</span> -c</div><div class="line">0</div><div class="line">$ <span class="built_in">ulimit</span> -c unlimited</div><div class="line">$ ./demo.o</div><div class="line">[1]    15193 segmentation fault (core dumped)  ./demo.o</div><div class="line">$ ~ ls</div><div class="line">core  demo.cpp  demo.o</div><div class="line">➜  ~ gdb demo.o core</div><div class="line">GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1</div><div class="line">Copyright (C) 2014 Free Software Foundation, Inc.</div><div class="line">......</div><div class="line">Core was generated by <span class="string">'./demo.o'</span>.</div><div class="line">Program terminated with signal SIGSEGV, Segmentation fault.</div><div class="line"><span class="comment">#0  0x00000000004006dd in test () at demo.cpp:6</span></div><div class="line">6	    *p = 1;</div><div class="line">(gdb) bt</div><div class="line"><span class="comment">#0  0x00000000004006dd in test () at demo.cpp:6</span></div><div class="line"><span class="comment">#1  0x00000000004006ee in main () at demo.cpp:9</span></div></pre></td></tr></table></figure>
+<h2 id="调试参数"><a href="#调试参数" class="headerlink" title="调试参数"></a>调试参数</h2><p>gdb调试中需要用到的命令</p>
+<ul>
+<li>file [filename]：装入想要调试的可执行文件</li>
+<li>kill [filename]：终止正在调试的程序</li>
+<li>break [file:]function：在(file文件的)function函数中设置一个断点</li>
+<li>clear：删除一个断点，这个命令需要指定代码行或者函数名作为参数</li>
+<li>run [arglist]：运行您的程序 (如果指定了arglist,则将arglist作为参数运行程序)</li>
+<li>bt Backtrace：显示程序堆栈信息</li>
+<li>x：查看内存</li>
+<li>print expr：打印表达式的值</li>
+<li>continue：继续运行您的程序 (在停止之后，比如在一个断点之后)</li>
+<li>list：列出产生执行文件的源代码的一部分</li>
+<li>next：单步执行 (在停止之后); 跳过函数调用（与step相对应，step会进入函数内部）</li>
+<li>set：设置变量的值。例如：set nval=54 将把54保存到nval变量中；设置输入参数也可以通过这个命令(例如当三个入参分别为a、b、c的话，set args a b c)</li>
+<li>watch：使你能监视一个变量的值而不管它何时被改变</li>
+<li>finish：继续执行，直到当前函数返回</li>
+<li>ignore：忽略某个断点制定的次数。例：ignore 4 23 忽略断点4的23次运行，在第24次的时候中断</li>
+<li>info [name]：查看name信息</li>
+<li>xbreak：在当前函数的退出的点上设置一个断点</li>
+<li>whatis：显示变量的值和类型</li>
+<li>ptype：显示变量的类型</li>
+<li>shell：使你能不离开 gdb 就执行 UNIX shell 命令</li>
+<li>help [name]：显示GDB命令的信息，或者显示如何使用GDB的总体信息</li>
+<li>quit：退出gdb.</li>
+</ul>
+<p><code>命令行参数</code></p>
+<p>有时候，我们需要调试的程序需要有命令行参数，可以通过下面两种方式设置调试的程序的命令行参数：</p>
+<ul>
+<li>gdb命令行的 –args 参数</li>
+<li>gdb环境中 set args命令。</li>
+</ul>
+<h2 id="高级的用法"><a href="#高级的用法" class="headerlink" title="高级的用法"></a>高级的用法</h2><p>比如为了搞清楚柔性数组的内存分布特征，我们可以用下面的程序来验证：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">struct line &#123;</div><div class="line">   int length;</div><div class="line">   char contents[0]; // C99：char contents[]; 没有指定数组长度</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main()&#123;</div><div class="line">    int this_length=10;</div><div class="line">    struct line *thisline = (struct line *)</div><div class="line">                     malloc (sizeof (struct line) + this_length);</div><div class="line">    thisline-&gt;length = this_length;</div><div class="line">    memset(thisline-&gt;contents, &apos;a&apos;, this_length);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后用下面的调试过程来理解柔性数组的内存分布：</p>
+<p><img src="http://7xrlu9.com1.z0.glb.clouddn.com/C++_GDB_Debug_1.png" alt=""></p>
+<h2 id="更多资料"><a href="#更多资料" class="headerlink" title="更多资料"></a>更多资料</h2><p><a href="http://www.vimer.cn/2009/11/使用gdb调试程序详解.html" target="_blank" rel="external">使用gdb调试程序详解</a><br><a href="http://coolshell.cn/articles/3643.html" target="_blank" rel="external">GDB中应该知道的几个调试方法</a><br><a href="http://blog.csdn.net/tenfyguo/article/details/8159176" target="_blank" rel="external">详解 coredump</a><br><a href="http://blog.jobbole.com/15837/" target="_blank" rel="external">C++编译器无法捕捉到的8种错误</a><br><a href="http://stackoverflow.com/questions/2346806/what-is-a-segmentation-fault" target="_blank" rel="external">What is a segmentation fault?</a>  </p>
+<blockquote>
+<p><a href="https://github.com/xuelangZF/CS_Offer/tree/master/C%2B%2B" target="_blank" rel="external">原文</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-小知识/" rel="tag"># C++小知识</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/30/cpp-memory/" rel="next" title="C++小知识之内存管理">
+                <i class="fa fa-chevron-left"></i> C++小知识之内存管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/01/02/cpp-gdb/"
+     data-title="C++小知识之GDB"
+     data-content=""
+     data-url="http://lxjdaydayup.cn/2017/01/02/cpp-gdb/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/02/cpp-gdb/"
+           data-title="C++小知识之GDB" data-url="http://lxjdaydayup.cn/2017/01/02/cpp-gdb/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DayDayUp" />
+          <p class="site-author-name" itemprop="name">DayDayUp</p>
+          <p class="site-description motion-element" itemprop="description">知足者常乐，能忍者自安</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/xiaojiele" target="_blank" title="gitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  gitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:lxjdaydayup@outlook.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.duxieren.com/" title="Dushuren" target="_blank">Dushuren</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.zhihu.com/topic/19550228/top-answers" title="Zhihu" target="_blank">Zhihu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的调试例子"><span class="nav-number">1.</span> <span class="nav-text">简单的调试例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-dump-调试"><span class="nav-number">2.</span> <span class="nav-text">core dump 调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试参数"><span class="nav-number">3.</span> <span class="nav-text">调试参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级的用法"><span class="nav-number">4.</span> <span class="nav-text">高级的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多资料"><span class="nav-number">5.</span> <span class="nav-text">更多资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DayDayUp</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lxjdaydayup"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

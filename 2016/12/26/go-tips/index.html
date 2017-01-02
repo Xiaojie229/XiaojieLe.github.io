@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="MYSPACE">
 <meta property="og:description" content="append()
 1234567mySlice := make([]int,5,10)mySlice = append(mySlice,1,2,3)	//实现在切片后面添加元素//append()的第二个参数是一个不定参数，我们可以根据需要添加若干个元素，也可以直接将一个切片追加到另一个切片的末尾。mySlice2 := []int&amp;#123;8,9,10&amp;#125;mySlice=append">
-<meta property="og:updated_time" content="2016-12-26T14:40:30.000Z">
+<meta property="og:updated_time" content="2017-01-02T15:18:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go小知识之注意事项">
 <meta name="twitter:description" content="append()
@@ -354,7 +354,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mySlice := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">5</span>,<span class="number">10</span>)</div><div class="line">mySlice = <span class="built_in">append</span>(mySlice,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)	<span class="comment">//实现在切片后面添加元素</span></div><div class="line"><span class="comment">//append()的第二个参数是一个不定参数，我们可以根据需要添加若干个元素，也可以直接将一个切片追加到另一个切片的末尾。</span></div><div class="line">mySlice2 := []<span class="keyword">int</span>&#123;<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;</div><div class="line">mySlice=<span class="built_in">append</span>(mySlice,mySlice2...)</div><div class="line"><span class="comment">//需要注意的是第二个参数后面的三个点，是一个省略号，如果没有则会编译出错。因为mySlice中的元素是int,所以直接传递mySlice2行不通，加上省略号相当于把mySlice2包含的所有元素打散后传入，等价于下面：</span></div><div class="line">mySlice = <span class="built_in">append</span>(mySlice,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</div></pre></td></tr></table></figure>
 <a id="more"></a>
 </li>
-<li><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>...<span class="keyword">else</span>...</div></pre></td></tr></table></figure>
+<li><p><code>if...else...</code></p>
 <p>在有返回值的函数中，不允许将“最终的”<code>return</code>语句包含在<code>if...else...</code>结构中，否则会编译失败，失败的原因在于，Go编译器无法找到终止函数的<code>return</code>语句。编译失败案例如下：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">example</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</div><div class="line">  <span class="keyword">if</span> x == <span class="number">0</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">5</span></div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">return</span> x</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -417,6 +417,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/26/alg-bubble/" rel="prev" title="Algorithm之Bubble Sort(冒泡排序)">
+                Algorithm之Bubble Sort(冒泡排序) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -498,7 +502,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -597,7 +601,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

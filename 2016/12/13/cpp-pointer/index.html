@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="MYSPACE">
 <meta property="og:description" content="指针数组，数组指针，函数指针
 123int (*a)[10]	//数组指针，指向数组的指针int *a[10]		//指针数组，数组存放的是一个指针bool (*a)(int)	//函数指针，指向一个返回bool，参数为int的函数">
-<meta property="og:updated_time" content="2016-12-14T15:32:34.000Z">
+<meta property="og:updated_time" content="2017-01-02T15:17:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++小知识之指针">
 <meta name="twitter:description" content="指针数组，数组指针，函数指针
@@ -363,6 +363,18 @@
 <li><p>大多数表达式中，使用数组类型的对象名称其实就是使用一个指向该数组首元素的指针(编译器会做这种转换)。但是要注意数组对象名称是一个<strong>常量指针</strong>，不能对其进行赋值，++等操作。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</div><div class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ia2</span><span class="params">(ia)</span></span>;	<span class="comment">//ia2是一个整形指针，指向ia的第一个元素</span></div><div class="line">ia++;	<span class="comment">//错误！常量指针不能进行++操作</span></div></pre></td></tr></table></figure>
 </li>
+<li><p>函数指针</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">bool (*pf) (const string&amp;, const string&amp;);	//函数指针</div><div class="line"></div><div class="line">typedef bool Func1(const string&amp;,const string&amp;);</div><div class="line">typedef decltype(function) Func2;	//function是一个函数，Func1，Func2都是函数类型，可当作函数直接使用</div><div class="line"></div><div class="line">//声明一个返回函数指针的函数：</div><div class="line">using F=int(int *,int)	//F是函数类型，不是指针</div><div class="line">using PF=int(*)(int *,int)	//PF是函数指针</div><div class="line">PF f1(int);	</div><div class="line">F * f1(int);	这两者等价，不能为 F f1(int)</div><div class="line">//该函数直接声明形式如下：</div><div class="line">  int (*f1(int))(int *,int)</div><div class="line">  </div><div class="line">//声明一个指向含有10个元素的数组的指针，每个元素是一个函数指针，函数指针返回int，参数int *</div><div class="line">int (*(*p)[10])(int *)</div></pre></td></tr></table></figure>
+<ol>
+<li><p>类成员函数指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//普通成员函数指针</span></div><div class="line"><span class="keyword">void</span> (Class::*f)();	<span class="comment">//定义</span></div><div class="line">f=&amp;Class::fun;	<span class="comment">//赋值</span></div><div class="line">(obj.*f)();	<span class="comment">//使用</span></div><div class="line"><span class="comment">//静态成员函数指针,与一般函数指针一样</span></div><div class="line"><span class="keyword">void</span> (*sf)();	<span class="comment">//定义</span></div><div class="line">sf=&amp;Class::static_fun;	<span class="comment">//赋值</span></div><div class="line">sf();	<span class="comment">//使用</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>野指针</p>
+<p>没有初始化的指针为野指针，指向的是未知的地址，不能直接修改其指向的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> x=<span class="number">0</span>,*p;</div><div class="line">p=<span class="literal">NULL</span>;	<span class="comment">//正确</span></div><div class="line">*p=<span class="literal">NULL</span>;	<span class="comment">//错误</span></div><div class="line">p=x;	<span class="comment">//错误</span></div><div class="line">*p=x;	<span class="comment">//错误，若p初始化过则正确</span></div></pre></td></tr></table></figure>
+</li>
 </ol>
 <p><a href="https://github.com/xuelangZF/CS_Offer/blob/master/C%2B%2B/Pointer.md" target="_blank" rel="external">详解1</a></p>
 <p><a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/13/2286391.html" target="_blank" rel="external">详解2</a></p>
@@ -492,7 +504,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -591,7 +603,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

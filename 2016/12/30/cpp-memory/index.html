@@ -1,0 +1,834 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++小知识," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在C/C++中，进程地址空间分为5个区：
+
+正文(text)段(代码段)：正文段是用来存放可执行文件的操作指令，也就是说是它是可执行程序在内存中的镜像。代码段需要防止在运行时被非法修改，所以只准许读取操作，而不允许写入口处（修改）操作——它是不可写的，某些架构也允许代码段可写。代码段也有可能保存一些只读常量变量，例如字符串常量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++小知识之内存管理">
+<meta property="og:url" content="http://lxjdaydayup.cn/2016/12/30/cpp-memory/index.html">
+<meta property="og:site_name" content="MYSPACE">
+<meta property="og:description" content="在C/C++中，进程地址空间分为5个区：
+
+正文(text)段(代码段)：正文段是用来存放可执行文件的操作指令，也就是说是它是可执行程序在内存中的镜像。代码段需要防止在运行时被非法修改，所以只准许读取操作，而不允许写入口处（修改）操作——它是不可写的，某些架构也允许代码段可写。代码段也有可能保存一些只读常量变量，例如字符串常量。">
+<meta property="og:image" content="http://7xrlu9.com1.z0.glb.clouddn.com/C++_Memory_1.jpg">
+<meta property="og:updated_time" content="2017-01-02T15:17:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++小知识之内存管理">
+<meta name="twitter:description" content="在C/C++中，进程地址空间分为5个区：
+
+正文(text)段(代码段)：正文段是用来存放可执行文件的操作指令，也就是说是它是可执行程序在内存中的镜像。代码段需要防止在运行时被非法修改，所以只准许读取操作，而不允许写入口处（修改）操作——它是不可写的，某些架构也允许代码段可写。代码段也有可能保存一些只读常量变量，例如字符串常量。">
+<meta name="twitter:image" content="http://7xrlu9.com1.z0.glb.clouddn.com/C++_Memory_1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lxjdaydayup.cn/2016/12/30/cpp-memory/"/>
+
+
+
+
+
+  <title> C++小知识之内存管理 | MYSPACE </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MYSPACE</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lxjdaydayup.cn/2016/12/30/cpp-memory/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DayDayUp">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MYSPACE">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MYSPACE" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++小知识之内存管理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-30T00:00:00+08:00">
+                2016-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/30/cpp-memory/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/cpp-memory/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在C/C++中，进程地址空间分为5个区：</p>
+<ol>
+<li>正文(text)段(代码段)：正文段是用来存放可执行文件的操作指令，也就是说是它是可执行程序在内存中的镜像。代码段需要防止在运行时被非法修改，所以只准许读取操作，而不允许写入口处（修改）操作——它是不可写的，某些架构也允许代码段可写。代码段也有可能保存一些只读常量变量，例如字符串常量。</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><code>DATA段（数据段）</code>：初始化数据段包含程序中明确地赋初值的变量，例如初始化后的全局变量和静态局部变量。数据段属于静态内存分配。</li>
+<li><code>BSS段（未初始化数据段）</code>(内存区)：BSS段包含了程序中未初始化的全局变量，它的特点是可读可写。程序开始执行前，内核将此段中的数据初始化为0或者空指针。</li>
+<li>堆（heap）：堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上（堆被扩张）；当利用free等函数释放内存时，被释放的内存从堆中被剔除（堆被缩减）</li>
+<li>栈：栈是用户存放程序临时创建的局部变量，也就是说我们函数括弧“{}”中定义的变量（但不包括static声明的变量，static意味着在数据段中存放变量）。除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。由于栈的后进先出特点，所以栈特别方便用来保存/恢复调用现场。从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。</li>
+</ol>
+<p>下图显示了这些段的一种典型安排方式：</p>
+<p><img src="http://7xrlu9.com1.z0.glb.clouddn.com/C++_Memory_1.jpg" alt=""></p>
+<p>看下面例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; </div><div class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>]; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在栈内存中存放了一个指向一块堆内存的指针p。程序首先确定在堆中分配内存的大小，然后调用operator new分配内存，然后返回这块内存的首地址，放入栈中指针 p。</p>
+<h2 id="使用动态内存的原因"><a href="#使用动态内存的原因" class="headerlink" title="使用动态内存的原因"></a>使用动态内存的原因</h2><ol>
+<li>程序不知道自己需要使用多少对象</li>
+<li>程序不知道所需对象的准确类型</li>
+<li>程序需要在多个对象间共享数据</li>
+</ol>
+<h2 id="内存分配回收"><a href="#内存分配回收" class="headerlink" title="内存分配回收"></a>内存分配回收</h2><p>有时候需要一次为很多对象分配/释放内存，为此 C++ 提供了 new/delete 操作符。为了让 new 分配一个对象数组，需要在类型名后跟一对方括号，在其中指明要分配的对象的数目。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> *pia = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> arrT[<span class="number">10</span>];   <span class="comment">// arrT 表示 10 个int的数组类型 </span></div><div class="line"><span class="keyword">int</span> *p = <span class="keyword">new</span> arrT;      <span class="comment">// 分配一个 10 个 int 的数组，p指向第一个int。编译器执行时和第一句完全一样</span></div></pre></td></tr></table></figure>
+<p>虽然通常称new T[] 分配的内存为动态数组，但当我们用new分配一个数组时，并未得到一个<code>数组类型的对象</code>，而是得到一个相应元素类型的<strong>指针</strong>。由于分配的内存并不是一个数组类型，因此不能对动态数组调用 begin 或 end，也不能用范围 for 语句来处理动态数组中的元素，sizeof 的结果也和真正的数组类型的对象不同。</p>
+<p>默认情况下，new 分配的对象，不管是单个分配的还是数组中的，都是默认初始化的。不过也可以对数组中的元素进行值初始化，方法是在大小之后跟一对空括号。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> *pia = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> *pia2 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>](<span class="number">0</span>);</div></pre></td></tr></table></figure>
+<p>使用new操作符来分配对象内存时会经历三个步骤：</p>
+<ol>
+<li>调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。</li>
+<li>编译器运行相应的构造函数以构造对象，并为其传入初值。</li>
+<li>对象构造完成后，返回一个指向该对象的指针。</li>
+</ol>
+<p>当我们使用一条 delete 表达式删除一个动态分配的对象时：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> sp;          <span class="comment">// 销毁 *sp, 然后释放 sp 指向的内存空间</span></div><div class="line"><span class="keyword">delete</span> [] arr;      <span class="comment">// 销毁数组中的元素，然后释放对应的内存空间</span></div></pre></td></tr></table></figure>
+<p>实际上执行了两步操作：</p>
+<ol>
+<li>对 sp 所指的对象或者 arr 所指的数组中的元素执行对应的析构函数。</li>
+<li>编译器调用标准库operator delete(或operator delete[])函数释放内存空间。</li>
+</ol>
+<p>数组中的元素按逆序销毁，即最后一个元素首先被销毁，然后是倒数第二个，依次类推。当释放一个指向数组的指针时，空方括号对是必需的：它指示编译器此指针指向一个对象数组的第一个元素。<strong>如果在 delete 一个指向数组的指针时忽略了方括号，或者在 delete 一个指向单一对象的指针时使用了方括号，其行为是未定义的。</strong></p>
+<h2 id="malloc-和-free-操作"><a href="#malloc-和-free-操作" class="headerlink" title="malloc 和 free 操作"></a>malloc 和 free 操作</h2><p><code>void *malloc(long NumBytes)</code> 分配 NumBytes 个字节，并返回了指向这块内存的首指针。如果分配失败，则返回一个空指针（NULL）。分配失败的原因有多种，比如说空间不足就是一种。malloc() 是从堆里面分配空间，也就是说函数返回的指针是指向堆里面的一块内存。操作系统中有一个记录空闲内存地址的链表。当操作系统收到程序的申请时，就会遍历该链表，然后就寻找第一个空间大于所申请空间的堆结点，然后就将该结点从空闲结点链表中删除，并将该结点的空间分配给程序。</p>
+<p>malloc()分配的存储空间比所要求的要稍大一些，额外的空间用来记录管理信息——分配块的长度，分配块是否已经可用（free 掉）。用结构体来记录管理信息，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct mem_control_block &#123; </div><div class="line">    int is_available;    //该块是否可用；</div><div class="line">    int size;            //该块可用空间的大小 </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><code>void free(void *FirstByte)</code> 将之前用malloc分配的空间还给程序或者是操作系统，也就是释放了这块内存，让它重新得到自由。free()释放的是<code>指针指向的内存</code>！指针并没有被释放，指针仍然指向原来的存储空间。指针是一个变量，只有程序结束时才被销毁。释放了内存空间后，原来指向这块空间的指针还是存在！只不过现在指针指向的内容是未定义的，因此，释放内存后最好把指针指向NULL，防止后面不小心又解引用该指针了。</p>
+<p>free()函数非常简单，只有一个参数，只要把指向申请空间的指针传递给free()即可。这是因为 free 是根据结构体 mem_control_block 的信息来释放malloc()申请的空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">void free(void *ptr)</div><div class="line">&#123;</div><div class="line">    struct mem_control_block *free;</div><div class="line">    free = ptr - sizeof(struct mem_control_block);</div><div class="line">    free-&gt;is_available = 1;</div><div class="line">    return;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>malloc 的一个具体使用例子在 <a href="https://gist.github.com/xuelangZF/573b1da0fbe0e7c6a568bd9530456766" target="_blank" rel="external">gist</a> 上。</p>
+<h2 id="new-和-malloc-的对比"><a href="#new-和-malloc-的对比" class="headerlink" title="new 和 malloc 的对比"></a>new 和 malloc 的对比</h2><ol>
+<li>new/delete是C++操作符，malloc/free是C/C++函数。</li>
+<li>使用new操作符申请内存分配时无须指定内存块的大小，编译器会根据类型信息自行计算，而malloc则需要显式地指出所需内存的大小。</li>
+<li>new/delete会调用对象的构造函数/析构函数以完成对象的构造/析构，而malloc只负责分配空间。</li>
+<li>new 操作符内存分配成功时，返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，故new是符合类型安全性的操作符。而malloc内存分配成功则是返回void <em> ，需要通过强制类型转换将 void</em> 指针转换成我们需要的类型。</li>
+<li>效率上：malloc的效率高一点，因为只分配了空间。</li>
+<li>operator new /operator delete 可以被重载，而 malloc/free 并不允许重载。</li>
+</ol>
+<h2 id="常见的内存错误"><a href="#常见的内存错误" class="headerlink" title="常见的内存错误"></a>常见的内存错误</h2><p>常见内存错误以及解决办法:</p>
+<ul>
+<li>内存分配未成功，却使用了它。（在使用内存之前检查指针是否为NULL。如果指针p是函数的参数，那么在函数的入口处用<code>assert(p!=NULL)</code>进行检查。如果是用malloc或new来申请内存，应该用<code>if(p==NULL)</code>或<code>if(p!=NULL)</code>进行防错处理。）</li>
+<li>内存分配虽然成功，但是尚未初始化就引用它。（无论用何种方式创建数组，都应该初始化）</li>
+<li>内存分配成功并且已经初始化，但操作越过了内存的边界。例如在使用数组时经常发生下标“多1”或者“少1”的操作。特别是在for循环语句中，循环次数很容易搞错，导致数组操作越界。</li>
+<li>忘记了释放内存，造成内存泄露。动态内存的申请与释放必须配对，程序中malloc与free的使用次数一定要相同，否则肯定有错误（new/delete）。</li>
+<li>释放了内存却继续使用它。</li>
+</ul>
+<h1 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h1><p>内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。</p>
+<p>内存泄漏是最难发现的常见错误之一，因为除非用完内存或调用malloc失败，否则都不会导致任何问题。实际上，使用C/C++这类没有垃圾回收机制的语言时，很多时间都花在处理如何正确释放内存上。如果程序运行时间足够长，如后台进程运行在服务器上，只要服务器不宕机就一直运行，一个小小的失误也会对程序造成重大的影响，如造成某些关键服务失败。</p>
+<p>C++中的内存泄露一般指<code>堆中的内存泄露</code>。堆内存是我们手动malloc/realloc/new申请的，程序不会自动回收，需要调用free或delete手动释放，否则就会造成内存泄露。内存泄露常见的原因大概有以下几种：</p>
+<ol>
+<li>“无主”内存：申请内存后，指针指向内存的起始地址，若丢失或修改这个指针，那么申请的内存将丢失且没法释放。</li>
+<li>异常分支导致资源未释放：程序正常执行没有问题，但是如果遇到异常，正常执行的顺序或分支会被打断，得不到执行。所以在异常处理的代码中，要确保系统资源的释放。</li>
+<li>类的析构函数为非虚函数：析构函数为虚函数，利用多态来调用指针指向对象的析构函数，而不是基类的析构函数。</li>
+</ol>
+<p>下面来看一个简单的内存泄漏示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> *x = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line">    <span class="keyword">int</span> *y = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</div><div class="line">    <span class="comment">// free(x);</span></div><div class="line">    <span class="comment">// delete []y;</span></div><div class="line">    <span class="comment">// x = NULL;</span></div><div class="line">    <span class="comment">// y = NULL;</span></div><div class="line">&#125;                    <span class="comment">// problem here: memory leak -- x, y not freed</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    f();</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="内存泄漏检测"><a href="#内存泄漏检测" class="headerlink" title="内存泄漏检测"></a>内存泄漏检测</h2><p>内存泄露检测的关键在于记录分配内存和释放内存的操作，看看能不能匹配。跟踪每一块内存的声明周期，例如：每当申请一块内存后，把指向它的指针加入到List中，当释放时，再把对应的指针从List中删除，到程序最后检查List就可以知道有没有内存泄露了。</p>
+<p>在一般的linux发行版中，有一个自带的工具可以很方便的替你完成这些事，这个工具就是mtrace。mtrace为内存分配、释放函数（malloc, realloc, memalign, free）安装hook函数，这些hook函数记录内存申请和释放的trace信息。 </p>
+<p>不过还有一款强大的检测工具 Valgrind，它是运行在Linux上一套基于仿真技术的程序调试和分析工具，包含一个内核——一个软件合成的CPU，和一系列的小工具，每个工具都可以完成一项任务──调试，分析，或测试等，其中Memcheck 工具可以用来方便的检测内存泄漏。</p>
+<p>可以用下面命令检测程序是否发生内存泄漏：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ valgrind --leak-check=yes ./demo.o</div></pre></td></tr></table></figure>
+<p>对于下面的程序来说</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Node &#123;</div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    Node *next;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">Node* still_reachable;</div><div class="line">Node* possible_lost;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</div><div class="line">    Node *tmp = <span class="keyword">new</span> Node;   <span class="comment">// definitely_lost</span></div><div class="line">    tmp-&gt;next = <span class="keyword">new</span> Node;   <span class="comment">// indirectly_lost</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    show();</div><div class="line">    still_reachable = <span class="keyword">new</span> Node;</div><div class="line">    possible_lost = <span class="keyword">new</span> Node[<span class="number">2</span>] + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一共有四种类型的内存泄漏（关于这四种泄漏类型的详细内容，参考  <a href="http://valgrind.org/docs/manual/mc-manual.html#mc-manual.leaks" target="_blank" rel="external">Memory leak detection</a>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">==45310== LEAK SUMMARY:</div><div class="line">==45310==    definitely lost: 16 bytes <span class="keyword">in</span> 1 blocks</div><div class="line">==45310==    indirectly lost: 16 bytes <span class="keyword">in</span> 1 blocks</div><div class="line">==45310==      possibly lost: 2,096 bytes <span class="keyword">in</span> 2 blocks</div><div class="line">==45310==    still reachable: 16 bytes <span class="keyword">in</span> 1 blocks</div><div class="line">==45310==         suppressed: 20,125 bytes <span class="keyword">in</span> 189 blocks</div><div class="line">==45310== Reachable blocks (those to <span class="built_in">which</span> a pointer was found) are not shown.</div></pre></td></tr></table></figure>
+<h2 id="更多阅读"><a href="#更多阅读" class="headerlink" title="更多阅读"></a>更多阅读</h2><p><a href="http://www.cnblogs.com/QG-whz/p/5140930.html" target="_blank" rel="external">细说new与malloc的10点区别</a><br><a href="http://stackoverflow.com/questions/93039/where-are-static-variables-stored-in-c-c" target="_blank" rel="external">Where are static variables stored (in C/C++)?</a><br><a href="http://www.inf.udec.cl/~leo/teoX.pdf" target="_blank" rel="external">Memory management in C: The heap and the stack</a> </p>
+<blockquote>
+<p><a href="https://github.com/xuelangZF/CS_Offer/tree/master/C%2B%2B" target="_blank" rel="external">原文</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-小知识/" rel="tag"># C++小知识</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/cpp-transform/" rel="next" title="C++小知识之类型转换">
+                <i class="fa fa-chevron-left"></i> C++小知识之类型转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/02/cpp-gdb/" rel="prev" title="C++小知识之GDB">
+                C++小知识之GDB <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/30/cpp-memory/"
+     data-title="C++小知识之内存管理"
+     data-content=""
+     data-url="http://lxjdaydayup.cn/2016/12/30/cpp-memory/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/30/cpp-memory/"
+           data-title="C++小知识之内存管理" data-url="http://lxjdaydayup.cn/2016/12/30/cpp-memory/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="DayDayUp" />
+          <p class="site-author-name" itemprop="name">DayDayUp</p>
+          <p class="site-description motion-element" itemprop="description">知足者常乐，能忍者自安</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/xiaojiele" target="_blank" title="gitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  gitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:lxjdaydayup@outlook.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.duxieren.com/" title="Dushuren" target="_blank">Dushuren</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.zhihu.com/topic/19550228/top-answers" title="Zhihu" target="_blank">Zhihu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用动态内存的原因"><span class="nav-number">1.</span> <span class="nav-text">使用动态内存的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配回收"><span class="nav-number">2.</span> <span class="nav-text">内存分配回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc-和-free-操作"><span class="nav-number">3.</span> <span class="nav-text">malloc 和 free 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-和-malloc-的对比"><span class="nav-number">4.</span> <span class="nav-text">new 和 malloc 的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的内存错误"><span class="nav-number">5.</span> <span class="nav-text">常见的内存错误</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存泄漏"><span class="nav-number"></span> <span class="nav-text">内存泄漏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存泄漏检测"><span class="nav-number">1.</span> <span class="nav-text">内存泄漏检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读"><span class="nav-number">2.</span> <span class="nav-text">更多阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DayDayUp</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lxjdaydayup"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
